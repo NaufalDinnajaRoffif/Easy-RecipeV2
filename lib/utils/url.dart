@@ -1,5 +1,6 @@
 class URL{
-  static final recipes_URL = 'https://masak-apa-tomorisakura.vercel.app/api/recipes/';
+  static final Base_URL = 'https://masak-apa.tomorisakura.vercel.app';
+  static final recipes_URL = '/api/recipes';
   static final recipes_URL_Dessert = 'https://masak-apa.tomorisakura.vercel.app/api/category/recipes/resep-dessert';
   static final recipes_URL_MasakanHariRaya = 'https://masak-apa.tomorisakura.vercel.app/api/category/recipes/masakan-hari-raya';
   static final recipes_URL_MasakanTradisional = 'https://masak-apa.tomorisakura.vercel.app/api/category/recipes/masakan-tradisional';

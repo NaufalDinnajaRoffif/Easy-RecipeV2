@@ -10,6 +10,7 @@ import 'package:easy_v3/screens/TabScreen/ScreenCategory7.dart';
 import 'package:easy_v3/screens/TabScreen/ScreenCategory8.dart';
 import 'package:easy_v3/screens/TabScreen/ScreenCategory9.dart';
 import 'package:easy_v3/provider/sign_in_provider.dart';
+import 'package:easy_v3/screens/search.dart';
 import 'package:easy_v3/utils/color.dart';
 import 'package:easy_v3/utils/url.dart';
 import 'package:provider/provider.dart';
@@ -39,8 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isloaded = false;
 
   void getAllListRecipes() async {
-    final res = await http.get(
-        Uri.parse(URL.recipes_URL));
+    final res = await http.get(Uri.parse(URL.recipes_URL));
     print("status code " + res.statusCode.toString());
     recipeModel = RecipesModel.fromJson(json.decode(res.body.toString()));
     print("Recipe 0 : " + recipeModel!.results![0].title.toString());
@@ -158,27 +158,41 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(
               height: 49,
-              child: TextField(
-                textCapitalization: TextCapitalization.words,
-                textAlignVertical: TextAlignVertical.bottom,
-                style: TextStyle(fontSize: 16, color: HexColor(ColoR.primary)),
-                cursorColor: HexColor('EEAF0E'),
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.search_rounded,
-                    color: HexColor('EEAF0E'),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: HexColor(ColoR.primary)),
-                      borderRadius: BorderRadius.all(Radius.circular(9))),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: HexColor(ColoR.primary)),
-                    borderRadius: BorderRadius.all(Radius.circular(9)),
-                  ),
-                  hintText: "Search Recipes",
-                  hintStyle: TextStyle(color: HexColor(ColoR.primary)),
-                ),
-              ),
+              child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(9)),
+                      side: BorderSide(
+                        width: 2,
+                        color: HexColor(
+                          ColoR.primary,
+                        ),
+                      )),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return search_page();
+                    }));
+                  },
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.search_rounded,
+                          color: HexColor(ColoR.primary),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Search Recipes",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, color: HexColor(ColoR.primary)),
+                        ),
+                      ],
+                    ),
+                  )),
             ),
             SizedBox(
               height: 10,
@@ -214,10 +228,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ));
                           },
                           child: listViewVerti(
-                              inputTextTitle: recipeModel!.results![index].title.toString(),
-                              inputTextTime: recipeModel!.results![index].times.toString(),
-                              inputTextDifficulty: recipeModel!.results![index].difficulty.toString(),
-                              imageURL: recipeModel!.results![index].thumb.toString()),
+                              inputTextTitle:
+                                  recipeModel!.results![index].title.toString(),
+                              inputTextTime:
+                                  recipeModel!.results![index].times.toString(),
+                              inputTextDifficulty: recipeModel!
+                                  .results![index].difficulty
+                                  .toString(),
+                              imageURL: recipeModel!.results![index].thumb
+                                  .toString()),
                         );
                       },
                     )
@@ -241,5 +260,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

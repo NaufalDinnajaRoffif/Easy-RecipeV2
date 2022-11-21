@@ -26,8 +26,7 @@ class _DetailRecipeState extends State<DetailRecipe> {
   bool isloaded = false;
 
   void getAllListRecipes() async {
-    final res = await http.get(
-        Uri.parse(URL.recipes_URL));
+    final res = await http.get(Uri.parse(URL.recipes_URL));
     print("status code ${res.statusCode}");
 
     final res1 = await http.get(Uri.parse(
@@ -144,57 +143,113 @@ class _DetailRecipeState extends State<DetailRecipe> {
                           Padding(padding: EdgeInsets.only(bottom: 10)),
                           Image.asset("assets/line.png"),
                           Padding(padding: EdgeInsets.only(bottom: 10)),
+
+                          DefaultTabController(
+                            length: 2,
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 80,
+                                  child: TabBar(
+                                    tabs: [
+                                      new Text("Ingredient",
+                                          textAlign: TextAlign.start,
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 17,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                      new Text(
+                                        "Step-byStep",
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  color: Colors.white,
+                                  height: double.maxFinite,
+                                  child: TabBarView(children: <Widget>[
+                                    new Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 300,
+                                          child: ListView.builder(
+                                            itemCount: detailrecipe!
+                                                .result!.ingredient!.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Text(
+                                                detailrecipe!
+                                                    .result!.ingredient![index],
+                                                maxLines: 10,
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    new Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 600,
+                                          child: ListView.builder(
+                                            itemCount: detailrecipe!
+                                                .result!.step!.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Text(
+                                                detailrecipe!
+                                                    .result!.step![index],
+                                                maxLines: 10,
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          ),
+
                           // Text(
                           //   detailrecipe!.result!.needItem.toString(),
                           //   style: TextStyle(fontSize: 14),
                           // ),
-                          Text("Ingredient",
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.poppins(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
-                              )),
 
-                          SizedBox(
-                            height: 300,
-                            child: ListView.builder(
-                              itemCount:
-                                  detailrecipe!.result!.ingredient!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Text(
-                                  detailrecipe!.result!.ingredient![index],
-                                  maxLines: 10,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                          // Text("Ingredient",
+                          //     textAlign: TextAlign.start,
+                          //     style: GoogleFonts.poppins(
+                          //       fontSize: 17,
+                          //       fontWeight: FontWeight.w600,
+                          //     )),
+                          //
 
-                          Text(
-                            "Step-byStep",
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 600,
-                            child: ListView.builder(
-                              itemCount: detailrecipe!.result!.step!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Text(
-                                  detailrecipe!.result!.step![index],
-                                  maxLines: 10,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                          //     ),
+                          //
+                          //     Text(
+                          //       "Step-byStep",
+                          //       textAlign: TextAlign.start,
+                          //       style: GoogleFonts.poppins(
+                          //         fontSize: 15,
+                          //         fontWeight: FontWeight.w600,
+                          //       ),
+                          //     ),
+
+                          // ),
                         ],
                       ),
                     ),

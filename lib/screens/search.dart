@@ -55,7 +55,7 @@ class _search_pageState extends State<search_page> {
                     color: HexColor('EEAF0E'),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: HexColor(ColoR.primary)), borderRadius: BorderRadius.all(Radius.circular(9))
+                    borderSide: BorderSide(color: HexColor(ColoR.primary),width: 2), borderRadius: BorderRadius.all(Radius.circular(9))
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: HexColor(ColoR.primary)),
