@@ -13,6 +13,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_v3/utils/color.dart';
 import 'package:easy_v3/BottomNavigationBar.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -23,13 +24,22 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
   final RoundedLoadingButtonController googleController =
-      RoundedLoadingButtonController();
+  RoundedLoadingButtonController();
   final RoundedLoadingButtonController facebookController =
-      RoundedLoadingButtonController();
+  RoundedLoadingButtonController();
   final RoundedLoadingButtonController twitterController =
-      RoundedLoadingButtonController();
+  RoundedLoadingButtonController();
   final RoundedLoadingButtonController phoneController =
-      RoundedLoadingButtonController();
+  RoundedLoadingButtonController();
+
+  Widget textLS(String inputText, double FontSize, FontWeight FontWeight,
+      Color Colors) {
+    return Text(
+      inputText,
+      style: GoogleFonts.poppins(
+          fontSize: FontSize, fontWeight: FontWeight, color: Colors),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(Config.bglogin), fit: BoxFit.cover)),
+                image: AssetImage(Config.bglogin), fit: BoxFit.cover,)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -50,23 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 80,
                   ),
-                  Text(
-                    "Welcome to ",
-                    style: GoogleFonts.poppins(
-                        fontSize: 44,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
+                  textLS("Welcome to", 44, FontWeight.w600, Colors.white),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    "Easy Recipe",
-                    style: GoogleFonts.poppins(
-                        fontSize: 34,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500),
-                  ),
+                  textLS("Easy Recipe", 34, FontWeight.w500, Colors.white),
                   const SizedBox(
                     height: 50,
                   ),
@@ -99,12 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             width: 15,
                           ),
-                          Text("Sign in with Google",
-                          style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500
-                          ),),
+                          textLS("Sign in with Google", 15, FontWeight.w500,
+                              Colors.white),
                         ],
                       ),
                     ),
@@ -127,13 +121,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     controller: facebookController,
                     successColor: Colors.blue,
-                    width: MediaQuery.of(context).size.width * 0.80,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.80,
                     elevation: 0,
                     borderRadius: 10,
-
                     color: Colors.blue,
                     child: Wrap(
-                      children: const [
+                      children: [
                         Icon(
                           FontAwesomeIcons.facebook,
                           size: 20,
@@ -142,11 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 15,
                         ),
-                        Text("Sign in with Facebook",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500)),
+                        textLS("Sign in with Facebook", 15, FontWeight.w500,
+                            Colors.white),
                       ],
                     ),
                   ),
@@ -161,12 +154,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     controller: twitterController,
                     successColor: Colors.lightBlue,
-                    width: MediaQuery.of(context).size.width * 0.80,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.80,
                     elevation: 0,
                     borderRadius: 10,
                     color: Colors.lightBlue,
                     child: Wrap(
-                      children: const [
+                      children: [
                         Icon(
                           FontAwesomeIcons.twitter,
                           size: 20,
@@ -175,11 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 30,
                         ),
-                        Text("Continue with Twitter",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500)),
+                        textLS("Sign in with Twitter", 15, FontWeight.w500,
+                            Colors.white),
                       ],
                     ),
                   ),
@@ -187,10 +180,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50,
                   ),
 
-                  Text("Don't Have an Acount?", style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300)),
+                  textLS(
+                      "Dont Have Account?", 16, FontWeight.w300, Colors.white),
                   const SizedBox(
                     height: 10,
                   ),
@@ -210,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children:  [
+                        children: [
                           Icon(
                             Icons.account_circle_outlined,
                             size: 30,
@@ -219,22 +210,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: 15,
                           ),
-                          Text("Sign up",
-                              style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500)),
+                          textLS("Sign Up", 15, FontWeight.w500, Colors.white),
                         ],
                       ),
                     ),
                   ),
-              SizedBox(
-                height: 20,),
-                  Text("By signing up, you agree to our \n terms of Service and Privacy policy",style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300),
-                      textAlign: TextAlign.center,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.center,
+                      child: textLS(
+                          "By signing up, you agree to our \n terms of Service and Privacy policy",
+                          16, FontWeight.w300, Colors.white),
                   )
                 ],
               ),
@@ -264,17 +252,21 @@ class _LoginScreenState extends State<LoginScreen> {
           sp.checkUserExists().then((value) async {
             if (value == true) {
               // user exists
-              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              await sp.getUserDataFromFirestore(sp.uid).then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         twitterController.success();
                         handleAfterSignIn();
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              sp.saveDataToFirestore().then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         twitterController.success();
                         handleAfterSignIn();
                       })));
@@ -304,17 +296,21 @@ class _LoginScreenState extends State<LoginScreen> {
           sp.checkUserExists().then((value) async {
             if (value == true) {
               // user exists
-              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              await sp.getUserDataFromFirestore(sp.uid).then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         googleController.success();
                         handleAfterSignIn();
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              sp.saveDataToFirestore().then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         googleController.success();
                         handleAfterSignIn();
                       })));
@@ -345,17 +341,21 @@ class _LoginScreenState extends State<LoginScreen> {
           sp.checkUserExists().then((value) async {
             if (value == true) {
               // user exists
-              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              await sp.getUserDataFromFirestore(sp.uid).then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         facebookController.success();
                         handleAfterSignIn();
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
+              sp.saveDataToFirestore().then((value) =>
+                  sp
+                      .saveDataToSharedPreferences()
+                      .then((value) =>
+                      sp.setSignIn().then((value) {
                         facebookController.success();
                         handleAfterSignIn();
                       })));
@@ -369,7 +369,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // handle after signin
   handleAfterSignIn() {
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-      nextScreenReplace(context,  BottomNavBar());
+      nextScreenReplace(context, BottomNavBar());
     });
   }
 }

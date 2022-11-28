@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:easy_v3/utils/config.dart';
 import 'package:easy_v3/utils/url.dart';
+import 'package:easy_v3/utils/wishlist_button.dart';
 import 'package:easy_v3/widgets/shimmer_list.dart';
 import 'package:flutter_expandable_text/flutter_expandable_text.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _DetailRecipeState extends State<DetailRecipe> {
   bool isloaded = false;
 
   void getAllListRecipes() async {
-    final res = await http.get(Uri.parse(URL.recipes_URL));
+    final res = await http.get(Uri.parse(URL.Base_URL + URL.recipes_URL));
     print("status code ${res.statusCode}");
 
     final res1 = await http.get(Uri.parse(
@@ -48,22 +49,26 @@ class _DetailRecipeState extends State<DetailRecipe> {
     getAllListRecipes();
   }
 
+  Widget textDetail(
+    String inputText,
+    double FontSize,
+    Color Colors,
+  ) {
+    return Text(
+      inputText,
+      style: GoogleFonts.poppins(
+        fontSize: FontSize,
+        color: Colors,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // body: Container(
-    //   child:isloaded? SingleChildScrollView(
-    //     child: Column(
-    //       children: [
-    //
-    //         Text(detailrecipe!.result!.desc.toString(),style: TextStyle(fontSize: 20),)
-    //       ],
-    //     ),
-    //   ):CircularProgressIndicator()
-    // ),
     return Scaffold(
         body: isloaded
             ? CustomScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: const ScrollPhysics(),
                 slivers: [
                   SliverAppBar(
                     automaticallyImplyLeading: false,
@@ -78,10 +83,10 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                       builder: (context) => BottomNavBar()));
                             },
                             icon: Icon(Icons.arrow_back_ios_new_rounded)),
-                        Icon(Icons.bookmark_add_outlined)
+                        WishlistButton(),
                       ],
                     ),
-                    toolbarHeight: 60,
+                    toolbarHeight: 70,
                     pinned: true,
                     backgroundColor: HexColor(ColoR.primary),
                     bottom: PreferredSize(
@@ -89,7 +94,7 @@ class _DetailRecipeState extends State<DetailRecipe> {
                       child: Container(
                         alignment: Alignment.center,
                         child: Padding(
-                          padding: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.all(10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -124,132 +129,146 @@ class _DetailRecipeState extends State<DetailRecipe> {
                   SliverToBoxAdapter(
                     child: Container(
                       color: Colors.white,
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.only(left: 20, right: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(padding: EdgeInsets.only(bottom: 10)),
                           Container(
-                            child: ExpandableText(
-                              detailrecipe!.result!.desc.toString(),
-                              style: GoogleFonts.poppins(
-                                  fontSize: 14, color: Colors.black),
-                              textAlign: TextAlign.start,
-                              trimType: TrimType.lines,
-                              trim: 6,
+                            padding: EdgeInsets.only(top: 5, bottom: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                textDetail(
+                                    "Made by: " +
+                                        detailrecipe!.result!.author!.user
+                                            .toString(),
+                                    14,
+                                    Colors.black),
+                                textDetail(
+                                    "Publication date: " +
+                                        detailrecipe!
+                                            .result!.author!.datePublished
+                                            .toString(),
+                                    14,
+                                    Colors.black),
+                                // textDetail(
+                                //     "Difficulty: " +
+                                //         detailrecipe!.result!.difficulty
+                                //             .toString(),
+                                //     14,
+                                //     Colors.black),
+                                textDetail(
+                                    "Servings: " +
+                                        detailrecipe!.result!.servings
+                                            .toString(),
+                                    14,
+                                    Colors.black),
+                              ],
                             ),
                           ),
                           Padding(padding: EdgeInsets.only(bottom: 10)),
                           Image.asset("assets/line.png"),
                           Padding(padding: EdgeInsets.only(bottom: 10)),
-
                           DefaultTabController(
                             length: 2,
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
-                                  height: 80,
                                   child: TabBar(
+                                    unselectedLabelColor:
+                                        HexColor(ColoR.tersier_TabBar),
+                                    indicator: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10),color: HexColor(ColoR.tersier_TabBar)),
+                                    labelColor: Colors.white,
+                                    labelStyle: GoogleFonts.poppins(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                    labelPadding:
+                                        EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                                     tabs: [
-                                      new Text("Ingredient",
-                                          textAlign: TextAlign.start,
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 17,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          )),
                                       new Text(
-                                        "Step-byStep",
-                                        textAlign: TextAlign.start,
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        "Ingredient",
+                                      ),
+                                      new Text(
+                                        "Direction",
                                       ),
                                     ],
                                   ),
                                 ),
                                 Container(
-                                  color: Colors.white,
-                                  height: double.maxFinite,
-                                  child: TabBarView(children: <Widget>[
-                                    new Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 300,
-                                          child: ListView.builder(
-                                            itemCount: detailrecipe!
-                                                .result!.ingredient!.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Text(
-                                                detailrecipe!
-                                                    .result!.ingredient![index],
-                                                maxLines: 10,
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 14,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    new Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 600,
-                                          child: ListView.builder(
-                                            itemCount: detailrecipe!
-                                                .result!.step!.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Text(
-                                                detailrecipe!
-                                                    .result!.step![index],
-                                                maxLines: 10,
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 14,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ]),
-                                ),
+                                    color: Colors.white,
+                                    height: 900,
+                                    child: TabBarView(children: <Widget>[
+                                      new Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 600,
+                                            child: ListView.separated(
+                                              separatorBuilder: (context, _) => SizedBox(
+                                                height: 6,
+                                              ),
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemCount: detailrecipe!
+                                                  .result!.ingredient!.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Text(
+                                                  (index + 1).toString() +
+                                                      ".  " +
+                                                      detailrecipe!.result!
+                                                          .ingredient![index],
+                                                  maxLines: 10,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      new Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 600,
+                                            child: ListView.separated(
+                                              separatorBuilder: (context, _) => SizedBox(
+                                                height: 6,
+                                              ),
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemCount: detailrecipe!
+                                                  .result!.step!.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Text(
+                                                  "" +
+                                                      detailrecipe!.result!
+                                                          .step![index],
+                                                  maxLines: 10,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ]))
                               ],
                             ),
                           ),
-
-                          // Text(
-                          //   detailrecipe!.result!.needItem.toString(),
-                          //   style: TextStyle(fontSize: 14),
-                          // ),
-
-                          // Text("Ingredient",
-                          //     textAlign: TextAlign.start,
-                          //     style: GoogleFonts.poppins(
-                          //       fontSize: 17,
-                          //       fontWeight: FontWeight.w600,
-                          //     )),
-                          //
-
-                          //     ),
-                          //
-                          //     Text(
-                          //       "Step-byStep",
-                          //       textAlign: TextAlign.start,
-                          //       style: GoogleFonts.poppins(
-                          //         fontSize: 15,
-                          //         fontWeight: FontWeight.w600,
-                          //       ),
-                          //     ),
-
-                          // ),
                         ],
                       ),
                     ),

@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isloaded = false;
 
   void getAllListRecipes() async {
-    final res = await http.get(Uri.parse(URL.recipes_URL));
+    final res = await http.get(Uri.parse(URL.Base_URL+URL.recipes_URL));
     print("status code " + res.statusCode.toString());
     recipeModel = RecipesModel.fromJson(json.decode(res.body.toString()));
     print("Recipe 0 : " + recipeModel!.results![0].title.toString());
@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 6,
             ),
             Container(
-              height: 270,
+              height: 238,
               child: isloaded == true
                   ? ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -230,8 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: listViewVerti(
                               inputTextTitle:
                                   recipeModel!.results![index].title.toString(),
-                              inputTextTime:
-                                  recipeModel!.results![index].times.toString(),
                               inputTextDifficulty: recipeModel!
                                   .results![index].difficulty
                                   .toString(),

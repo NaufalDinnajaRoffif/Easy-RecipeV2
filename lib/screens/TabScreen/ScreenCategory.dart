@@ -22,7 +22,7 @@ class _DessertState extends State<Dessert> {
 
   void getAllListCategoryScreen() async {
     final res = await http.get(Uri.parse(
-        URL.recipes_URL_Dessert));
+        URL.Base_URL+URL.recipes_by_category_URL+URL.recipes_URL_Dessert));
     print("status code " + res.statusCode.toString());
 
     recipeModel = RecipesModel.fromJson(json.decode(res.body.toString()));
@@ -62,7 +62,6 @@ class _DessertState extends State<Dessert> {
           },
           child: listViewVerti(
               inputTextTitle: recipeModel!.results![index].title.toString(),
-              inputTextTime: recipeModel!.results![index].times.toString(),
               inputTextDifficulty: recipeModel!.results![index].difficulty.toString(),
               imageURL: recipeModel!.results![index].thumb.toString()),
         );

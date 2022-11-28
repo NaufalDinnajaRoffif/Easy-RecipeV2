@@ -4,5 +4,6 @@ class ColoR{
   static final tersier = '000C75';
   static final tersier_dark_mode = '69008D';
   static final tersier_help = '000C75';
-  static final tersier_logout= 'FF0000';
+  static final tersier_logout = 'FF0000';
+  static final tersier_TabBar = '8A5804';
 }

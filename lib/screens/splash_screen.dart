@@ -25,11 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
     final sp = context.read<SignInProvider>();
     super.initState();
     // create a timer of 2 seconds
-    Timer( Duration(seconds: 2), () {
+    Timer(Duration(seconds: 2), () {
       sp.isSignedIn == false
           ? nextScreen(context, const LoginScreen())
           : nextScreen(context, const BottomNavBar());
     });
+  }
+
+  Widget textSS(
+      String inputText, double FontSize, FontWeight FontWeight, Color Colors) {
+    return Text(
+      inputText,
+      style: GoogleFonts.poppins(
+          fontSize: FontSize, fontWeight: FontWeight, color: Colors),
+    );
   }
 
   @override
@@ -44,24 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 500,
+              height: 600,
             ),
-            Text(
-              "Let's\nCook",
-              style: GoogleFonts.poppins(
-                fontSize: 34,
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "Find The Best Recipe",
-              style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600),
-            ),
+            textSS("Let's Cook", 38, FontWeight.w600, Colors.white),
+            textSS("Find The Best Recipe", 14, FontWeight.w600, Colors.white),
             SizedBox(
               height: 20,
             ),
@@ -78,11 +73,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: HexColor(ColoR.primary),
                 ),
-                child: Text("Start Cooking",
-                    style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600)),
+                child:
+                    textSS("Start Cook", 20, FontWeight.w600, Colors.white),
               ),
             ),
             Expanded(child: SizedBox()),

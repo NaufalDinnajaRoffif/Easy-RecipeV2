@@ -21,7 +21,8 @@ class _MenuMakanSiangState extends State<MenuMakanSiang> {
   bool isloaded = false;
 
   void getAllListCategoryScreen() async {
-    final res = await http.get(Uri.parse(
+    final res = await http.get(Uri.parse(URL.Base_URL +
+        URL.recipes_by_category_URL +
         URL.recipes_URL_MenuMakanSiang));
     print("status code " + res.statusCode.toString());
 
@@ -62,9 +63,10 @@ class _MenuMakanSiangState extends State<MenuMakanSiang> {
                       ));
                 },
                 child: listViewVerti(
-                    inputTextTitle: recipeModel!.results![index].title.toString(),
-                    inputTextTime: recipeModel!.results![index].times.toString(),
-                    inputTextDifficulty: recipeModel!.results![index].difficulty.toString(),
+                    inputTextTitle:
+                        recipeModel!.results![index].title.toString(),
+                    inputTextDifficulty:
+                        recipeModel!.results![index].difficulty.toString(),
                     imageURL: recipeModel!.results![index].thumb.toString()),
               );
             },

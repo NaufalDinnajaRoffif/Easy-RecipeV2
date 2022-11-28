@@ -21,7 +21,8 @@ class _ResepSeafoodState extends State<ResepSeafood> {
   bool isloaded = false;
 
   void getAllListCategoryScreen() async {
-    final res = await http.get(Uri.parse(
+    final res = await http.get(Uri.parse(URL.Base_URL +
+        URL.recipes_by_category_URL +
         URL.recipes_URL_ResepSeafood));
     print("status code " + res.statusCode.toString());
 
@@ -44,32 +45,32 @@ class _ResepSeafoodState extends State<ResepSeafood> {
   Widget build(BuildContext context) {
     return isloaded
         ? ListView.separated(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      separatorBuilder: (context, _) => SizedBox(
-        width: 20,
-      ),
-      itemCount: recipeModel!.results!.length,
-      itemBuilder: (BuildContext context, int index) {
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DetailRecipe(
-                    keys: recipeModel!.results![index].key!.toString(),
-                  ),
-              )
-            );
-          },
-          child: listViewVerti(
-              inputTextTitle: recipeModel!.results![index].title.toString(),
-              inputTextTime: recipeModel!.results![index].times.toString(),
-              inputTextDifficulty: recipeModel!.results![index].difficulty.toString(),
-              imageURL: recipeModel!.results![index].thumb.toString()),
-        );
-      },
-    )
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            separatorBuilder: (context, _) => SizedBox(
+              width: 20,
+            ),
+            itemCount: recipeModel!.results!.length,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailRecipe(
+                          keys: recipeModel!.results![index].key!.toString(),
+                        ),
+                      ));
+                },
+                child: listViewVerti(
+                    inputTextTitle:
+                        recipeModel!.results![index].title.toString(),
+                    inputTextDifficulty:
+                        recipeModel!.results![index].difficulty.toString(),
+                    imageURL: recipeModel!.results![index].thumb.toString()),
+              );
+            },
+          )
         : ShimmerList();
   }
 }
