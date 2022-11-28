@@ -64,7 +64,7 @@ class listViewVerti extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
             Padding(
                 padding: EdgeInsets.only(left: 10),

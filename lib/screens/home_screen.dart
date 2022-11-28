@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: EdgeInsets.only(
                   top: 15,
                 ),
-                height: MediaQuery.of(context).size.height * 0.30,
+                height: MediaQuery.of(context).size.height * 0.27,
                 child: TabBarView(children: [
                   Dessert(),
                   MasakanHariRaya(),
