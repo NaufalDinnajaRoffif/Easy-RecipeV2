@@ -37,7 +37,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> widgetList = const [
     HomeScreen(),
-    // search_page(),
     SaveScreen(),
     Profil_page()
   ];

@@ -17,9 +17,11 @@ class listViewVerti extends StatelessWidget {
     return Container(
       width: 278,
       child: Card(
+        // elevation: 2,
+        // shadowColor: HexColor(ColoR.secondary),
         shape: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
-            borderRadius: BorderRadius.circular(13)),
+            borderRadius: BorderRadius.circular(13),),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

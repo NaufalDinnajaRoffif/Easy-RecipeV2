@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Flexible(
               child: Container(
                 margin: EdgeInsets.only(
-                  top: 15,
+                  top: 10,
                 ),
                 height: MediaQuery.of(context).size.height * 0.27,
                 child: TabBarView(children: [
@@ -142,19 +142,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextSpan(
                     text: "Hello ",
                     style: GoogleFonts.poppins(
-                        fontSize: 25,
+                        fontSize: 28,
                         color: Colors.black,
                         fontWeight: FontWeight.w600)),
                 TextSpan(
                     text: "${sp.name}",
                     style: GoogleFonts.poppins(
-                        fontSize: 25,
+                        fontSize: 28,
                         color: HexColor(ColoR.primary),
                         fontWeight: FontWeight.w600)),
               ],
             )),
             SizedBox(
-              height: 8,
+              height: 10,
             ),
             SizedBox(
               height: 49,
@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
             ),
             SizedBox(
-              height: 10,
+              height: 30,
             ),
             Text(
               "Trending Now",
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : ShimmerList(),
             ),
             SizedBox(
-              height: 10,
+              height: 16,
             ),
             Text(
               "Popular Category",

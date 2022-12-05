@@ -66,6 +66,25 @@ class _DetailRecipeState extends State<DetailRecipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   leading: IconButton(
+        //       onPressed: () {
+        //         Navigator.push(context,
+        //             MaterialPageRoute(builder: (context) => BottomNavBar()));
+        //       },
+        //       icon: Icon(Icons.arrow_back_ios_new_rounded)),
+        //   title: Text(
+        //     "Menu Detail",
+        //     style: GoogleFonts.poppins(
+        //         color: Colors.white, fontWeight: FontWeight.w500),
+        //   ),
+        //   actions: [
+        //     WishlistButton(),
+        //     SizedBox(width: 15,),
+        //   ],
+        // ),
         body: isloaded
             ? CustomScrollView(
                 physics: const ScrollPhysics(),
@@ -83,6 +102,11 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                       builder: (context) => BottomNavBar()));
                             },
                             icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                        Text(
+                          "Menu Detail",
+                          style: GoogleFonts.poppins(
+                              color: Colors.white, fontWeight: FontWeight.w500),
+                        ),
                         WishlistButton(),
                       ],
                     ),
@@ -154,12 +178,6 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                             .toString(),
                                     14,
                                     Colors.black),
-                                // textDetail(
-                                //     "Difficulty: " +
-                                //         detailrecipe!.result!.difficulty
-                                //             .toString(),
-                                //     14,
-                                //     Colors.black),
                                 textDetail(
                                     "Servings: " +
                                         detailrecipe!.result!.servings
@@ -182,14 +200,14 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                     unselectedLabelColor:
                                         HexColor(ColoR.tersier_TabBar),
                                     indicator: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10),color: HexColor(ColoR.tersier_TabBar)),
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: HexColor(ColoR.tersier_TabBar)),
                                     labelColor: Colors.white,
                                     labelStyle: GoogleFonts.poppins(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600),
-                                    labelPadding:
-                                        EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                                    labelPadding: EdgeInsets.symmetric(
+                                        horizontal: 18, vertical: 8),
                                     tabs: [
                                       new Text(
                                         "Ingredient",
@@ -205,13 +223,16 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                     height: 900,
                                     child: TabBarView(children: <Widget>[
                                       new Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             height: 600,
                                             child: ListView.separated(
-                                              separatorBuilder: (context, _) => SizedBox(
+                                              separatorBuilder: (context, _) =>
+                                                  SizedBox(
                                                 height: 6,
                                               ),
                                               physics:
@@ -237,11 +258,13 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                         ],
                                       ),
                                       new Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             height: 600,
                                             child: ListView.separated(
-                                              separatorBuilder: (context, _) => SizedBox(
+                                              separatorBuilder: (context, _) =>
+                                                  SizedBox(
                                                 height: 6,
                                               ),
                                               physics:
@@ -253,8 +276,8 @@ class _DetailRecipeState extends State<DetailRecipe> {
                                                       int index) {
                                                 return Text(
                                                   "" +
-                                                      detailrecipe!.result!
-                                                          .step![index],
+                                                      detailrecipe!
+                                                          .result!.step![index],
                                                   maxLines: 10,
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 14,
@@ -275,6 +298,6 @@ class _DetailRecipeState extends State<DetailRecipe> {
                   )
                 ],
               )
-            : Center(child: Image.asset(Config.anime_logo)));
+            : Center(child: ShimmerList()));
   }
 }
